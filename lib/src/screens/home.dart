@@ -3,9 +3,8 @@ import 'package:swipedetector/swipedetector.dart';
 import '../blocs/imageprovider.dart';
 
 class Home extends StatelessWidget {
-  int photoIndex = 0;
-
-  List<String> photos = [
+  
+  final List<String> photos = [
     "https://e00-marca.uecdn.es/assets/multimedia/imagenes/2018/12/25/15457730278274.jpg",
     "http://outsideoftheboot.com/wp-content/uploads/2015/07/Jose-Gimenez-2015-Atletico.png",
     "https://e00-marca.uecdn.es/assets/multimedia/imagenes/2017/12/03/15122952947600.jpg",
@@ -15,14 +14,14 @@ class Home extends StatelessWidget {
     "https://cdn-s3.si.com/s3fs-public/styles/marquee_large_2x/public/2018/09/28/koke-atletico-madrid-spain.jpg"
   ];
 
-  void _previousImage(ImageBloc bloc) {
-    photoIndex = (photoIndex - 1) % photos.length;
-    bloc.changeImage(photoIndex);
+  void _previousImage(ImageBloc bloc, int index) {
+    index = (index - 1) % photos.length;
+    bloc.changeImage(index);
   }
 
-  void _nextImage(ImageBloc bloc) {
-    photoIndex = (photoIndex + 1) % photos.length;
-    bloc.changeImage(photoIndex);
+  void _nextImage(ImageBloc bloc, int index) {
+    index = (index + 1) % photos.length;
+    bloc.changeImage(index);
   }
 
   Widget build(BuildContext context) {
@@ -44,10 +43,10 @@ class Home extends StatelessWidget {
                   children: <Widget>[
                     SwipeDetector(
                       onSwipeLeft: () {
-                        _nextImage(bloc);
+                        _nextImage(bloc,snapshot.hasData?snapshot.data:0);
                       },
                       onSwipeRight: () {
-                        _previousImage(bloc);
+                        _previousImage(bloc,snapshot.hasData?snapshot.data:0);
                       },
                       swipeConfiguration: SwipeConfiguration(
                           horizontalSwipeMinDisplacement: 10.0,
@@ -58,7 +57,7 @@ class Home extends StatelessWidget {
                           borderRadius: BorderRadius.circular(25.0),
                           image: DecorationImage(
                             image: NetworkImage(photos[
-                                snapshot.hasData ? snapshot.data : photoIndex]),
+                                snapshot.hasData ? snapshot.data : 0]),
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -73,7 +72,7 @@ class Home extends StatelessWidget {
                       child: SelectedPhoto(
                         numberOfDots: photos.length,
                         photoIndex:
-                            snapshot.hasData ? snapshot.data : photoIndex,
+                            snapshot.hasData ? snapshot.data : 0,
                       ),
                     ),
                   ],
