@@ -57,7 +57,8 @@ class Home extends StatelessWidget {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(25.0),
                           image: DecorationImage(
-                            image: NetworkImage(photos[snapshot.hasData?snapshot.data:photoIndex]),
+                            image: NetworkImage(photos[
+                                snapshot.hasData ? snapshot.data : photoIndex]),
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -71,7 +72,8 @@ class Home extends StatelessWidget {
                       right: 25.0,
                       child: SelectedPhoto(
                         numberOfDots: photos.length,
-                        photoIndex: snapshot.hasData?snapshot.data:photoIndex,
+                        photoIndex:
+                            snapshot.hasData ? snapshot.data : photoIndex,
                       ),
                     ),
                   ],
@@ -85,92 +87,6 @@ class Home extends StatelessWidget {
   }
 }
 
-/*
-class Home extends StatefulWidget {
-  _HomeState createState() => new _HomeState();
-}
-
-class _HomeState extends State<Home> {
-  int photoIndex = 0;
-
-  List<String> photos = [
-    "https://e00-marca.uecdn.es/assets/multimedia/imagenes/2018/12/25/15457730278274.jpg",
-    "http://outsideoftheboot.com/wp-content/uploads/2015/07/Jose-Gimenez-2015-Atletico.png",
-    "https://e00-marca.uecdn.es/assets/multimedia/imagenes/2017/12/03/15122952947600.jpg",
-    "http://as01.epimg.net/futbol/imagenes/2017/06/04/primera/1496570307_204106_1496570423_noticia_normal.jpg",
-    "https://akm-img-a-in.tosshub.com/indiatoday/images/story/201805/Diego-Costa.png",
-    "https://shakarasquare.com/wp-content/uploads/2017/07/Saul-Niguez.jpg",
-    "https://cdn-s3.si.com/s3fs-public/styles/marquee_large_2x/public/2018/09/28/koke-atletico-madrid-spain.jpg"
-  ];
-
-  void _previousImage() {
-    setState(() {
-      photoIndex = (photoIndex - 1) % photos.length;
-      print(photoIndex);
-    });
-  }
-
-  void _nextImage() {
-    setState(() {
-      photoIndex = (photoIndex + 1 )% photos.length;
-      print(photoIndex);
-    });
-  }
-
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Atleti Players"),
-        centerTitle: true,
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Center(
-            child: Stack(
-              children: <Widget>[
-                SwipeDetector(
-                  onSwipeLeft: (){
-                    _nextImage();
-                  },
-                  onSwipeRight: (){
-                    _previousImage();
-                  },
-                  swipeConfiguration: SwipeConfiguration(
-                    horizontalSwipeMinDisplacement: 10.0,
-                    horizontalSwipeMinVelocity: 150.0,
-                    horizontalSwipeMaxHeightThreshold: 50.0
-                  ),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25.0),
-                      image: DecorationImage(
-                        image: NetworkImage(photos[photoIndex]),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    height: 400.0,
-                    width: 300.0,
-                  ),
-                ),
-                Positioned(
-                  top: 375.0,
-                  left: 25.0,
-                  right: 25.0,
-                  child: SelectedPhoto(
-                    numberOfDots: photos.length,
-                    photoIndex: photoIndex,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-*/
 class SelectedPhoto extends StatelessWidget {
   final int numberOfDots;
   final int photoIndex;
