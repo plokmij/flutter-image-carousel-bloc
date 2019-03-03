@@ -19,13 +19,15 @@ class _HomeState extends State<Home> {
 
   void _previousImage() {
     setState(() {
-      photoIndex = photoIndex > 0 ? photoIndex - 1 : 0;
+      photoIndex = (photoIndex - 1) % photos.length;
+      print(photoIndex);
     });
   }
 
   void _nextImage() {
     setState(() {
-      photoIndex = photoIndex < photos.length - 1 ? photoIndex + 1 : photoIndex;
+      photoIndex = (photoIndex + 1 )% photos.length;
+      print(photoIndex);
     });
   }
 
